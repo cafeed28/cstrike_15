@@ -1,6 +1,51 @@
 # Game directory
 /*game*/
 
+# Libraries that must be built by the programmer
+src/lib/*/*bzip2.*
+src/lib/*/*mxtoolkitwin32.*
+src/lib/*/*appframework.*
+src/lib/*/*bitmap.*
+src/lib/*/*bitmap_byteswap.*
+src/lib/*/*bonesetup.*
+src/lib/*/*choreoobjects.*
+src/lib/*/*datamodel.*
+src/lib/*/*dme_controls.*
+src/lib/*/*dmserializers.*
+src/lib/*/*dmxloader.*
+src/lib/*/*fgdlib.*
+src/lib/*/*fow.*
+src/lib/*/*game_controls.*
+src/lib/*/*interfaces.*
+src/lib/*/*materialobjects.*
+src/lib/*/*matchmakingbase.*
+src/lib/*/*matchmakingbase_ds.*
+src/lib/*/*mathlib.*
+src/lib/*/*mathlib_extended.*
+src/lib/*/*matsys_controls.*
+src/lib/*/*mdlobjects.*
+src/lib/*/*meshutils.*
+src/lib/*/*movieobjects.*
+src/lib/*/*particles.*
+src/lib/*/*quickhull.*
+src/lib/*/*raytrace.*
+src/lib/*/*resourcefile.*
+src/lib/*/*responserules_runtime.*
+src/lib/*/*shaderlib.*
+src/lib/*/*soundsystem_lowlevel.*
+src/lib/*/*tier0.*
+src/lib/*/*tier1.*
+src/lib/*/*tier2.*
+src/lib/*/*tier3.*
+src/lib/*/*toolutils.*
+src/lib/*/*unitlib.*
+src/lib/*/*vgui_controls.*
+src/lib/*/*vgui_surfacelib.*
+src/lib/*/*videocfg.*
+src/lib/*/*vpklib.*
+src/lib/*/*vstdlib.*
+src/lib/*/*vtf.*
+
 # Visual Studio
 *.vs/
 Release*/
@@ -17,3 +62,6 @@ Debug*/
 _vpc_/
 
 *_nut.h
+
+# Protobuf compiler
+generated_proto/
