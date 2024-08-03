@@ -1,0 +1,19 @@
+# Game directory
+/*game*/
+
+# Visual Studio
+*.vs/
+Release*/
+Debug*/
+*.sln
+*.vcproj*
+*.vcxproj*
+*.tlb
+*.pch
+
+# Valve Project Creator
+*.vpc_cache
+*.vpc_crc
+_vpc_/
+
+*_nut.h
