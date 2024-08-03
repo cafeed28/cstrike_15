@@ -23,8 +23,6 @@ $Macro _STATICSUBDIR	"Static"					[$STATIC_LINK]
 $Macro _STATICSUBDIR	"StaticTest"				[$VPC_STATIC_LINK_TEST]
 
 $Conditional DISABLE_TCMALLOC 1					[$LINUXALL]
-// $Conditional LINK_P4API "true"					[$STATIC_LINK && $WINDOWS]
-$Conditional REQUIRES_ITERATOR_DEBUGGING "true" [$LINK_P4API] //or else we get linker errors against the p4api libs
 $Conditional DISABLE_MULTIPROCESSOR_COMPILATION "true"
 
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"		[!$STATIC_LINK]
@@ -34,7 +32,7 @@ $Configuration
 {
 	$General
 	{
-		$AdditionalProjectDependencies		"$BASE;binlaunch;p4lib;filesystem_stdio"	[!$STATIC_LINK]
+		$AdditionalProjectDependencies		"$BASE;binlaunch;filesystem_stdio"	[!$STATIC_LINK]
 	}
 	
 	$Compiler
@@ -68,17 +66,12 @@ $Configuration
 	$PostBuildEvent [$WINDOWS && $STATIC_LINK && !$ANALYZE]
 	{
 		// Copy dlls over from the game bin directory, to insulate vpc from changes in those dlls
-		// tier0, vstdlib, p4lib, filesystem_stdio
+		// tier0, vstdlib, filesystem_stdio
 
 		$CommandLine		"$BASE" "\n" \
-							"call $SRCDIR\vpc_scripts\valve_p4_edit.cmd $SRCDIR\devtools\bin\vstdlib.dll $SRCDIR $QUOTEVPC Auto Checkout$QUOTE" "\n" \
 							"copy $SRCDIR\..\game\bin\vstdlib.dll $SRCDIR\devtools\bin" "\n" \
-							"call $SRCDIR\vpc_scripts\valve_p4_edit.cmd $SRCDIR\devtools\bin\tier0.dll $SRCDIR $QUOTEVPC Auto Checkout$QUOTE" "\n" \
 							"copy $SRCDIR\..\game\bin\tier0.dll $SRCDIR\devtools\bin" "\n" \
-							"call $SRCDIR\vpc_scripts\valve_p4_edit.cmd $SRCDIR\devtools\bin\filesystem_stdio.dll $SRCDIR $QUOTEVPC Auto Checkout$QUOTE" "\n" \
 							"copy $SRCDIR\..\game\bin\filesystem_stdio.dll $SRCDIR\devtools\bin" "\n" \
-							"call $SRCDIR\vpc_scripts\valve_p4_edit.cmd $SRCDIR\devtools\bin\p4lib.dll $SRCDIR $QUOTEVPC Auto Checkout$QUOTE" "\n" \
-							"copy $SRCDIR\..\game\bin\p4lib.dll $SRCDIR\devtools\bin" "\n" \
 							"echo Check in contents of changelist $QUOTEVPC Auto Checkout$QUOTE"
 	}
 }
@@ -101,7 +94,6 @@ $Project "$VPCNAME"
 		$File	"groupscript.cpp"
 		$File	"macros.cpp"
 		$File	"main.cpp"
-		$File	"p4sln.cpp"							[$WINDOWS]
 		$File	"pch_helpers.cpp"
 		$File	"projectgenerator_android.cpp"
 //		$File	"projectgenerator_codelite.cpp"
@@ -134,7 +126,6 @@ $Project "$VPCNAME"
 		$File	"generatordefinition.h"
 		$File	"ibaseprojectgenerator.h"
 		$File	"ibasesolutiongenerator.h"
-		$File	"p4sln.h"							[$WINDOWS]
 		$File	"projectgenerator_android.h"
 		$File	"projectgenerator_android.inc"
 //		$File	"projectgenerator_codelite.h"
@@ -153,21 +144,6 @@ $Project "$VPCNAME"
 		$File	"scriptsource.h"		
 		$file	"sys_utils.h"
 		$File	"vpc.h"
-	}
-	
-	$Folder	"Link Libraries"
-	{
-		$Lib	 "p4lib_staticlink"	[$LINK_P4API]
-
-		$Lib	"$SRCDIR/lib/common/libclient"		[$LINK_P4API && !$VS2015]
-		$Lib	"$SRCDIR/lib/common/libp4sslstub"	[$LINK_P4API && !$VS2015]
-		$Lib	"$SRCDIR/lib/common/librpc"		[$LINK_P4API && !$VS2015]
-		$Lib	"$SRCDIR/lib/common/libsupp"		[$LINK_P4API && !$VS2015]
-
-		$Lib	"$SRCDIR/lib/common/2015/libclient"	[$LINK_P4API && $VS2015]
-		$Lib	"$SRCDIR/lib/common/2015/libp4sslstub"	[$LINK_P4API && $VS2015]
-		$Lib	"$SRCDIR/lib/common/2015/librpc"	[$LINK_P4API && $VS2015]
-		$Lib	"$SRCDIR/lib/common/2015/libsupp"	[$LINK_P4API && $VS2015]
 	}
 
 	$Folder	"VPC Definitions"

@@ -15,7 +15,7 @@ $Configuration
 {
 	$General
 	{
-		$AdditionalProjectDependencies		"$BASE;binlaunch;p4lib;filesystem_stdio"
+		$AdditionalProjectDependencies		"$BASE;binlaunch;filesystem_stdio"
 	}
 	
 	$Compiler
@@ -36,7 +36,6 @@ $Configuration
 		$CommandLine		"$BASE" "\n" \
 							"\n" \
 							"echo ... Copying BINLAUNCH.EXE to VPC.EXE" "\n" \
-							"call $SRCDIR\vpc_scripts\valve_p4_edit.cmd $OUTBINDIR\vpc.exe $SRCDIR" "\n" \
 							"copy $SRCDIR\devtools\bin\binlaunch.exe $OUTBINDIR\vpc.exe" "\n" \
 							"if ERRORLEVEL 1 goto BinLaunchCopyFailed" "\n" \
 							"\n" \
@@ -62,7 +61,6 @@ $Project "vpc"
 		$File	"dependencies.cpp"
 		$File	"GroupScript.cpp"
 		$File	"main.cpp"
-		$File	"p4sln.cpp"							[$WIN32]
 		$File	"projectgenerator_vcproj.cpp"
 		$File	"projectgenerator_makefile.cpp"
 		$File	"projectgenerator_xcode.cpp"
@@ -88,7 +86,6 @@ $Project "vpc"
 		$File	"dependencies.h"
 		$File	"ibaseprojectgenerator.h"
 		$File	"ibasesolutiongenerator.h"
-		$File	"p4sln.h"							[$WIN32]
 		$File	"projectgenerator_xcode.h"
 		$file	"projectgenerator_ps3.h"
 		$file	"projectgenerator_ps3.inc"
